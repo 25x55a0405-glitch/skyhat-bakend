@@ -93,14 +93,26 @@ const startServer = async () => {
   }
 
   // 4. Start listening
-  app.listen(PORT, () => {
-    console.log(`\n🚀 SkyChat backend running on port ${PORT} ✓`);
-    console.log(`   Model: ${process.env.OPENROUTER_MODEL || 'z-ai/glm-4.5-air:free'}`);
-    console.log(`   CORS:  ${process.env.CORS_ORIGIN || '*'}\n`);
-  });
+  if (!process.env.VERCEL) {
+    app.listen(PORT, () => {
+      console.log(`\n🚀 SkyChat backend running on port ${PORT} ✓`);
+      console.log(`   Model: ${process.env.OPENROUTER_MODEL || 'z-ai/glm-4.5-air:free'}`);
+      console.log(`   CORS:  ${process.env.CORS_ORIGIN || '*'}\n`);
+    });
+  } else {
+    console.log('⚡ Running in Serverless/Vercel environment - skipping app.listen');
+  }
 };
 
-startServer().catch((err) => {
-  console.error('❌ Fatal startup error:', err);
-  process.exit(1);
-});
+if (process.env.VERCEL) {
+  startServer().catch((err) => {
+    console.error('❌ Serverless startup error:', err);
+  });
+} else {
+  startServer().catch((err) => {
+    console.error('❌ Fatal startup error:', err);
+    process.exit(1);
+  });
+}
+
+module.exports = app;
