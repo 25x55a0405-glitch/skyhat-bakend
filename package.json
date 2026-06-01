@@ -1,0 +1,26 @@
+{
+  "name": "skychat-backend",
+  "version": "1.0.0",
+  "description": "SkyChat — AI customer support chatbot backend for business websites",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": ["chatbot", "ai", "customer-support", "openai"],
+  "author": "SkyWeb Agency <skyaiwebservices@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.5",
+    "morgan": "^1.10.0",
+    "nodemailer": "^6.9.16",
+    "openai": "^4.77.0",
+    "uuid": "^11.0.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
